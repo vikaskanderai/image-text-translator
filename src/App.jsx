@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { LanguageSelect } from "./components/languageSelect";
 import { Label } from "@/components/ui/label";
+import { Type } from "lucide-react";
 
 function App() {
   const [image, setImage] = useState(null);
@@ -23,9 +24,13 @@ function App() {
     }
     const formData = new FormData();
     formData.append("file", image);
+    formData.append("fromLang", fromLang);
+    formData.append("toLang", toLang);
     fetch("http://localhost:8000/upload", {
       method: "POST",
+      // headers: { "Content-Type": "multipart/form-data" },
       body: formData,
+
       // body: {
       //   file: formData,
       //   fromLang: fromLang,
